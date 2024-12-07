@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Shop</title>
+    <link rel="stylesheet" href="./assets/css/output.css">
+    <style>
+        /* Ensure the slider takes up the full width and height */
+        #slider {
+            height: 446px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Style for the images in the slider to fit the container */
+        #slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the image covers the entire area without distortion */
+        }
+    </style>
+</head>
+<body>
+    <section class="header"></section>
+    <section id="slider" class="bg-gray-500 overflow-hidden"></section>
+
+    <section class="latest-movies" class="grid">
+
+    </section>
+
+    <section class="footer"></section>
+
+    <script type="module">
+        import slides from "./resources/slides.js";
+        import Header from "./components/Header.js";
+        import Footer from "./components/Footer.js";
+        import LatestMovies from "./components/LatestMovies.js";
+        import Slider from "./components/Slider.js";
+
+        document.querySelector('.header').innerHTML = Header();
+
+        const slider = document.querySelector('#slider');
+       
+
+        // Initialize the slider with the settings
+        Slider({
+            slides: slides,
+            active_slide: 0,
+            container: slider,
+            delay: 1    
+        });
+
+        LatestMovies({
+            url:'https://api.themoviedb.org/3/discover/movie?api_key=3e52e2f5350ae60de5e2fc58e818d2a0',
+            container: document.querySelector('.latest-movies'),
+            numer_of_movies: 4,
+        });
+
+        document.querySelector('.footer').innerHTML = Footer();
+    </script>
+</body>
+</html>

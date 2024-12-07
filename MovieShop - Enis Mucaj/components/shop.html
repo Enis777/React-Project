@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Shop</title>
+    <link rel="stylesheet" href="./assets/css/output.css">
+   
+</head>
+<body>
+    <section class="header"></section>
+
+    <section class="py-12">
+        <div class="container mx-auto">
+            <div class="flex justify-between items-center"></div>
+            <h2 class="text-4xl text-center mb-12">Shop</h2>
+            <div class="">
+                <input type="search" class="border">
+            </div>
+            <div id="shop" class="grid grid grid-cols-4 gap-8 mb-12">
+            
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="footer"></section>
+
+    <script type="module">
+        import Header from "./components/Header.js";
+        import Footer from "./components/Footer.js";
+        import LatestMovies from "./components/:atestMovies.js"
+
+        let page = 1;
+        let url ='';
+        const prev = document.querySelector('button#prev')
+
+        const search = document.querySelector('input[type="search"]')
+        const serch_url=""
+
+        document.querySelector('.header').innerHTML = Header();
+        LatestMovies({
+            container:document.querySelector('#shop'),
+            url:`${url}${page}`,
+            number_of_movies:20
+        })
+
+        prev.addEventListener('click', event =>{
+            if(page>1){
+                page--;
+        LatestMovies({
+            container:document.querySelector('#shop'),
+            url:`${url}${page}`,
+            number_of_movies:20
+        })
+            }
+        })
+
+        next.addEventListener('click', event =>{
+            page++;
+        LatestMovies({
+            container:document.querySelector('#shop'),
+            url:`${url}${page}`,
+            number_of_movies:20
+        })
+            }
+        )
+
+        search.addEventListener('keyup', event =>{
+            const title = event.target.value;
+            switch(event.keyCode){
+            
+            case 13:
+                LatestMovies({
+                    container:document.querySelector('#shop'),
+                    url:`${search_url}${title}`,
+                    number_of_movies:20
+            })
+                break;
+            }
+        }
+        )
+    
+        document.querySelector('.footer').innerHTML = Footer();
+    </script>
+</body>
+</html>
